@@ -1,19 +1,24 @@
 import React from 'react';
-import NUM_OF_GUESSES_ALLOWED from '../../constants';
+import { checkGuess } from '../../game-helpers';
 
-function Guess({ guess }) {
-	const chars = guess?.split('');
+function Guess({ guess, answer }) {
+	const result = guess && checkGuess(guess, answer);
 	const cols = Array.from(Array(5).keys()).map(() => ({
 		id: crypto.randomUUID(),
 	}));
 
 	return (
 		<p className='guess'>
-			{cols.map(({ id }, index) => (
-				<span className='cell' key={id}>
-					{chars && chars[index]}
-				</span>
-			))}
+			{cols.map(({ id }, index) => {
+				const char = result && result[index];
+				return (
+					<span
+						className={`cell ${char ? char.status : ''}`}
+						key={id}>
+						{char?.letter}
+					</span>
+				);
+			})}
 		</p>
 	);
 }
