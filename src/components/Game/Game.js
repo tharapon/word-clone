@@ -16,13 +16,13 @@ function Game() {
 			window.alert(`Sorry, you've already guess this word! 😘`);
 			return;
 		}
-		const newResult = [...guesses, guess];
-		setGuesses(newResult);
+		const newGuesses = [...guesses, guess];
+		setGuesses(newGuesses);
 	};
 	return (
 		<>
 			<GuessResult guesses={guesses} />
-			<GuessInput handleGuessResult={handleGuesses} />
+			<GuessInput handleGuesses={handleGuesses} />
 		</>
 	);
 }
